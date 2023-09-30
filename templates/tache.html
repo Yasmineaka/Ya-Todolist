@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/compte_epargne.css">
+    <title>Compte Épargne</title>
+</head>
+<body>
+<!-- tableau-de-bord -->
+    <div class="tableau-de-bord">
+        <div class="logo">
+            <a href="#"><h2 style="color: rgb(188, 188, 89); -webkit-text-stroke: 0.3px white;">Test<span style="color: white;">Yaka-MF</span></h2></a>
+        </div>
+
+        <div class="menu">
+            <ul>
+                <li><a style="text-decoration: underline;" href="#">Accueil</a></li>
+                <li><a style="text-decoration: underline;" href="{{ url_for('dashboard') }}">Tableau de bord</a></li>
+                <li><a href="{{ url_for('a_propos') }}">À Propos</a></li>
+            </ul>
+        </div>
+        <!-- <div class="boutons">
+            <button><a href="{{ url_for('connexion') }}">Connexion</a></button>
+            <button><a href="{{ url_for('inscription_info') }}">Inscription</a></button>
+        </div> -->
+        <div class="menu-burger-icon">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+    <div class="barre-menu">
+        <button class="menu-bouton1"> <a href="{{ url_for('dashboard') }}">Gérer le solde</a></button>
+        <button class="menu-bouton2"> <a href="{{ url_for('transfert') }}">Effectuer un transfert</a></button>
+        <button class="menu-bouton3"  style=" background: #65bfff75;"> <a href="{{ url_for('compte_epargne') }}">Compte epargne</a></button>
+        <button class="menu-bouton4"> <a href="{{ url_for('deconnexion') }}">Se déconnecter</a></button>
+    </div>
+
+    <div class="compte-epargne">
+        <h4>Compte Épargne</h4>
+        
+        <div class="solde">
+            <p>{{ solde }} F</p>
+        </div>
+        
+        <form class="epargne-form button" method="POST" action="/compte_epargne">
+            <label for="montant_epargne">Montant à épargner :</label>
+            <input type="number" id="montant_epargne" name="montant_epargne" required>
+            <button type="submit">Créer le compte épargne</button>
+        </form>
+       
+        <div class="compte-epargne">
+            <h2>Comptes Épargne</h2>
+            {% if comptes_epargne %}
+                <ul>
+                    {% for compte in comptes_epargne %}
+                        <li>Montant épargné : {{ compte.montant_epargne }} F</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucun compte épargne créé pour le moment.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
